@@ -8,7 +8,7 @@ A Cryptogtaphy based project involving **Hill Cipher** and **Linear Transformati
 - Hill n-cipher
 - Digraphs
 
-***For further resources, refer [here.](https://sites.math.washington.edu/~marshall/math_136/projects/crypto.pdf) and [here](https://sites.math.washington.edu/~king/coursedir/m308a01/Projects/Cryptography.htm)***
+***For further resources, refer [here](https://sites.math.washington.edu/~marshall/math_136/projects/crypto.pdf) and [here](https://sites.math.washington.edu/~king/coursedir/m308a01/Projects/Cryptography.htm)***.
 
 ### Team Members
 - Lipi Kansal
