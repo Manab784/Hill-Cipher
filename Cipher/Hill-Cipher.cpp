@@ -6,6 +6,34 @@
 
 using namespace std;
 
+double det(int n, int mat[3][3])
+{
+    //Check for all cases as datatype was double initially
+    int subj = 0, subi = 0, i, j, c;
+    int submat[3][3], d = 0;
+    if (n == 2)
+        return ((mat[0][0] * mat[1][1]) - (mat[1][0] * mat[0][1]));
+    else
+    {
+        for (c = 0; c < n; c++)
+        {
+            for (i = 1; i < n; i++)
+            {
+                for (j = 0; j < n; j++)
+                {
+                    if (j == c)
+                        continue;
+                    submat[subi][subj] = mat[i][j];
+                    subj++;
+                }
+                subi++;
+             }
+            d = d + (pow(-1, c) * mat[0][c] * det(n - 1, submat));
+        }
+    }
+    return d;
+}
+
 int main()
 {
     char word[26];
@@ -38,16 +66,18 @@ int main()
         int encryptWordVec[3][1];
 
         //Generating Encryption Key Array - No word split up as l <=3
-      srand(time(0));  
-      for(int i=0; i<l; i++)
-        {
-            for(int j=0; j<l; j++)
+      srand(time(0));
+      do
+      {
+        for(int i=0; i<l; i++)
             {
-                keyVec[i][j] = ((rand() % 100) + 1) % 26;
+                for(int j=0; j<l; j++)
+                {
+                    keyVec[i][j] = ((rand() % 100) + 1) % 26;
+                }
             }
-        }
-
-        //Add code to check for singularity of Key Array
+      }
+      while(det(3,keyVec) != 0);
 
         //Encryption Array
        for(int i=0; i<l; i++)
