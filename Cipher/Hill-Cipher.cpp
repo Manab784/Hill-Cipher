@@ -6,33 +6,30 @@
 
 using namespace std;
 
-double det(int n, int mat[3][3])
+int determinant(int matrix[3][3], int n) 
 {
-    //Check for all cases as datatype was double initially
-    int subj = 0, subi = 0, i, j, c;
-    int submat[3][3], d = 0;
-    if (n == 2)
-        return ((mat[0][0] * mat[1][1]) - (mat[1][0] * mat[0][1]));
-    else
-    {
-        for (c = 0; c < n; c++)
-        {
-            for (i = 1; i < n; i++)
-            {
-                for (j = 0; j < n; j++)
-                {
-                    if (j == c)
-                        continue;
-                    submat[subi][subj] = mat[i][j];
-                    subj++;
-                }
-                subi++;
-             }
-            d = d + (pow(-1, c) * mat[0][c] * det(n - 1, submat));
-        }
-    }
-    return d;
-}
+   int det = 0;
+   int submatrix[3][3];
+   if (n == 2)
+   return ((matrix[0][0] * matrix[1][1]) - (matrix[1][0] * matrix[0][1]));
+   else {
+      for (int x = 0; x < n; x++) {
+         int subi = 0;
+         for (int i = 1; i < n; i++) {
+            int subj = 0;
+            for (int j = 0; j < n; j++) {
+               if (j == x)
+               continue;
+               submatrix[subi][subj] = matrix[i][j];
+               subj++;
+            }
+            subi++;
+         }
+         det = det + (pow(-1, x) * matrix[0][x] * determinant( submatrix, n - 1 ));
+      }
+   }
+   return det;
+  }
 
 int main()
 {
@@ -77,7 +74,7 @@ int main()
                 }
             }
       }
-      while(det(3,keyVec) != 0);
+      while(determinant(keyVec,3) == 0);
 
         //Encryption Array
        for(int i=0; i<l; i++)
@@ -101,7 +98,7 @@ int main()
         }
 
         //Encryption Key
-        cout<<"\n"<<"Encryption Key: /";
+        cout<<"\n"<<"Encryption Key: / ";
         for(int i=0; i<3; i++)
         {
             for(int j=0; j<3; j++)
