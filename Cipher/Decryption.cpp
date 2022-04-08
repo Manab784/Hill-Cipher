@@ -54,15 +54,35 @@ void inverseMatrix(int matrix[3][3])
 
 int main() 
 {
+  char word[3];
+  char key[3][3];
+  
   int keyVec[3][3];
   int wordVec[3][1];
 
+  cin>>word;
+  for(int i=0; i<3; i++)
+    {
+      for(int j=0; j<3; j++)
+        {
+          cin>>key[i][j];
+        }
+    }
+  
   //Accepting Input Word
   for(int i=0; i<3; i++)
     {
       for(int j=0; j<1; j++)
         {
-          cin>>wordVec[i][j];
+          if(isupper(word[i]))
+          {
+            wordVec[i][j] = int(word[i] - 65);
+          }
+          else
+          {
+            wordVec[i][j] = int(word[i] - 97);
+          }
+          
         }
     }
 
@@ -71,7 +91,14 @@ int main()
     {
       for(int j=0; j<3; j++)
         {
-          cin>>keyVec[i][j];
+          if(isupper(key[i][j]))
+          {
+            keyVec[i][j] = int(key[i][j] - 65);
+          }
+          else
+          {
+            keyVec[i][j] = int(key[i][j] - 97);
+          }
         }
     }
 
