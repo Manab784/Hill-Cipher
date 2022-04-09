@@ -38,18 +38,30 @@ int determinant(int matrix[3][3], int n)
   return det;
 }
 
+//Change to float
 void inverseMatrix(int matrix[3][3])
 {
   int det = determinant(matrix,3);
+  int resMat[3][3];
   for(int i = 0; i < 3; i++)
   {
     for(int j = 0; j < 3; j++)
       {
-        matrix[i][j] = ((matrix[(j+1)%3][(i+1)%3] *         matrix[(j+2)%3][(i+2)%3]) - (matrix[(j+1)%3]        [(i+2)%3] * matrix[(j+2)%3][(i+1)%3]))/det;
+        resMat[i][j] = ((matrix[(j+1)%3][(i+1)%3] *         matrix[(j+2)%3][(i+2)%3]) - (matrix[(j+1)%3]        [(i+2)%3] * matrix[(j+2)%3][(i+1)%3]))/det;
 
-        matrix[i][j] %= 26;
+        resMat[i][j] %= 26;
+        cout<<resMat[i][j]<<" ";
       }
   }
+  cout<<"\n"<<"\n";
+
+  for(int i=0; i<3; i++)
+    {
+      for(int j=0; j<3; j++)
+        {
+          matrix[i][j] = resMat[i][j];
+        }
+    }
 }
 
 int main() 
@@ -60,6 +72,8 @@ int main()
   int keyVec[3][3];
   int wordVec[3][1];
 
+  cout<<"\n";
+
   cin>>word;
   for(int i=0; i<3; i++)
     {
@@ -69,7 +83,7 @@ int main()
         }
     }
   
-  //Accepting Input Word
+  //Calculating Input Word
   for(int i=0; i<3; i++)
     {
       for(int j=0; j<1; j++)
@@ -86,7 +100,7 @@ int main()
         }
     }
 
-  //Accepting Decryption Key
+  //Calculating Decryption Key
   for(int i=0; i<3; i++)
     {
       for(int j=0; j<3; j++)
@@ -103,12 +117,58 @@ int main()
     }
 
   int det = determinant(keyVec, 3);
+
+  //Temporary
+  cout<<"\n";
+  for(int i=0; i<3; i++)
+    {
+      for(int j=0; j<1; j++)
+        {
+          cout<<wordVec[i][j];
+        }
+      cout<<"\n";
+    }
+
+  cout<<endl;
+
+  for(int i=0; i<3; i++)
+    {
+      for(int j=0; j<3; j++)
+        {
+          cout<<keyVec[i][j]<<" ";
+        }
+      cout<<endl;
+    }
+
+  cout<<"\n";
+  //End of Temporary
+  
   //Proceeding if Decryption Key is Non Singular
   if(det != 0)
   {
     inverseMatrix(keyVec);
+    //Temporary
+    for(int i=0; i<3; i++)
+      {
+        for(int j=0; j<3; j++)
+          {
+            cout<<keyVec[i][j];
+          }
+        cout<<"\n";
+      }
+    cout<<"\n";
+    //End of Temporary
+    
     int resVec[3][1];
 
+    for(int i=0; i<3; i++)
+      {
+        for(int j=0; j<1; j++)
+          {
+            resVec[i][j] = 0;
+          }
+      }
+    
     //Producing Result Vector
     for(int i=0; i<3; i++)
       {
@@ -117,11 +177,22 @@ int main()
             for(int k=0; k<3; k++)
               {
                 resVec[i][j] += keyVec[i][k] * wordVec[k][j];
-                resVec[i][j] %= 26;
+                //resVec[i][j] %= 26;
               }
           }
       }
 
+  //Temporary
+    for(int i=0; i<3; i++)
+      {
+        for(int j=0; j<1; j++)
+          {
+            cout<<resVec[i][j];
+          }
+        cout<<"\n";
+      }
+  //End of Temporary
+    
     //Printing Decoded Text
     cout<<"\n"<<"Decoded Text: ";
     for(int i=0; i<3; i++)
