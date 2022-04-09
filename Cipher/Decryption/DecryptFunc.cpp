@@ -1,9 +1,10 @@
 #include <iostream>
 #include <math.h>
 #include <stdio.h>
-#include<fstream>
+#include <fstream>
 #include <string.h>
 #include <time.h>
+#include"Decryption.h"
 
 using namespace std;
 
@@ -56,7 +57,7 @@ void inverseMatrix(int matrix[3][3])
   {
     for(int j = 0; j < 3; j++)
       {
-        resMat[i][j] = ((matrix[(j+1)%3][(i+1)%3] *         matrix[(j+2)%3][(i+2)%3]) - (matrix[(j+1)%3]        [(i+2)%3] * matrix[(j+2)%3][(i+1)%3])) * modMulInv;
+        resMat[i][j] = ((matrix[(j+1)%3][(i+1)%3] * matrix[(j+2)%3][(i+2)%3]) - (matrix[(j+1)%3][(i+2)%3] * matrix[(j+2)%3][(i+1)%3])) * modMulInv;
       }
   }
 
@@ -76,27 +77,9 @@ void inverseMatrix(int matrix[3][3])
     }
 }
 
-int main() 
+void inWord(char word[3], int wordVec[3][1])
 {
-  char word[3];
-  char key[3][3];
-  
-  int keyVec[3][3];
-  int wordVec[3][1];
-
-  cout<<"\n";
-
-  cin>>word;
-  for(int i=0; i<3; i++)
-    {
-      for(int j=0; j<3; j++)
-        {
-          cin>>key[i][j];
-        }
-    }
-  
-  //Calculating Input Word
-  for(int i=0; i<3; i++)
+    for(int i=0; i<3; i++)
     {
       for(int j=0; j<1; j++)
         {
@@ -111,9 +94,11 @@ int main()
           
         }
     }
+}
 
-  //Calculating Decryption Key
-  for(int i=0; i<3; i++)
+void decryptKey(char key[3][3], int keyVec[3][3])
+{
+    for(int i=0; i<3; i++)
     {
       for(int j=0; j<3; j++)
         {
@@ -127,16 +112,10 @@ int main()
           }
         }
     }
+}
 
-  int det = determinant(keyVec, 3);
-
-  //Proceeding if Decryption Key is Non Singular
-  if(det != 0)
-  {
-    inverseMatrix(keyVec);
-    
-    int resVec[3][1];
-
+void resultVec(int resVec[3][1], int keyVec[3][3], int wordVec[3][1])
+{
     for(int i=0; i<3; i++)
       {
         for(int j=0; j<1; j++)
@@ -157,8 +136,10 @@ int main()
               }
           }
       }
-    
-    //Printing Decoded Text
+}
+
+void display(int resVec[3][1])
+{
     cout<<"\n"<<"Decoded Text: ";
     for(int i=0; i<3; i++)
       {
@@ -169,5 +150,4 @@ int main()
       }
 
     cout<<endl;
-  }
 }

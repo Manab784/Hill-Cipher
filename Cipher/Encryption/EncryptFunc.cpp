@@ -1,9 +1,10 @@
 #include <iostream>
 #include <math.h>
 #include <stdio.h>
-#include<fstream>
+#include <fstream>
 #include <string.h>
 #include <time.h>
+#include"Encryption.h"
 
 using namespace std;
 
@@ -38,25 +39,8 @@ int determinant(int matrix[3][3], int n)
   return det;
 }
 
-int main() 
+void wordGen(int wordVec[26][1], char word[26], int l)
 {
-  char text[100];
-  char word[26];
-  int wordVec[26][1];
-
-  cout<<"\n";
-
-  cin >> text;
-
-  //Add code to split input text into pairs of 3 letters 
-  strcpy(word,text);
-
-  int l = strlen(word);
-
-  if (l == 3) 
-  {
-    //Encrpyts the text input in pairs of 3 letters
-    //Generating Word Vector
     for (int i = 0; i < l; i++) 
     {
       for (int j = 0; j < 1; j++) 
@@ -71,11 +55,10 @@ int main()
         }
       }
     }
+}
 
-    int keyVec[3][3];
-    int encryptWordVec[3][1];
-
-    // Generating Encryption Key Array - No word split up as l <=3
+void keyGen(int keyVec[3][3], int l)
+{
     srand(time(0));
     do 
     {
@@ -88,8 +71,10 @@ int main()
       }
     } 
     while (determinant(keyVec, 3) == 0);
+}
 
-    // Encryption Array
+void encryptArray(int encryptWordVec[3][1], int keyVec[3][3], int wordVec[26][1], int l)
+{
     for (int i = 0; i < l; i++) 
     {
       for (int j = 0; j < 1; j++) 
@@ -109,8 +94,10 @@ int main()
         encryptWordVec[i][j] %= 26;
       }
     }
+}
 
-    // Encryption Key
+void displayKey(int keyVec[3][3])
+{
     cout << "\n"
          << "Encryption Key: / ";
     for (int i = 0; i < 3; i++) 
@@ -122,7 +109,10 @@ int main()
       cout << "/ ";
     }
 
-    // Encrypted Word
+}
+
+void displayWord(int encryptWordVec[3][1])
+{
     cout << "\n"
          << "Encrypted Word: ";
     for (int i = 0; i < 3; i++) 
@@ -132,7 +122,5 @@ int main()
         cout << char(encryptWordVec[i][j] + 65) << " ";
       }
     }
-
     cout << "\n" <<"\n";
-  } 
 }
