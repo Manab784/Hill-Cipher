@@ -38,28 +38,40 @@ int determinant(int matrix[3][3], int n)
   return det;
 }
 
-//Change to float
+int modInverse(int a, int m)
+{
+    for (int x = 1; x < m; x++)
+        if (((a%m) * (x%m)) % m == 1)
+            return x;
+  return 0;
+}
+
 void inverseMatrix(int matrix[3][3])
 {
   int det = determinant(matrix,3);
+  int modMulInv = modInverse(det,26);
+  
   int resMat[3][3];
   for(int i = 0; i < 3; i++)
   {
     for(int j = 0; j < 3; j++)
       {
-        resMat[i][j] = ((matrix[(j+1)%3][(i+1)%3] *         matrix[(j+2)%3][(i+2)%3]) - (matrix[(j+1)%3]        [(i+2)%3] * matrix[(j+2)%3][(i+1)%3]))/det;
-
-        resMat[i][j] %= 26;
-        cout<<resMat[i][j]<<" ";
+        resMat[i][j] = ((matrix[(j+1)%3][(i+1)%3] *         matrix[(j+2)%3][(i+2)%3]) - (matrix[(j+1)%3]        [(i+2)%3] * matrix[(j+2)%3][(i+1)%3])) * modMulInv;
       }
   }
-  cout<<"\n"<<"\n";
 
   for(int i=0; i<3; i++)
     {
       for(int j=0; j<3; j++)
         {
-          matrix[i][j] = resMat[i][j];
+          if(resMat[i][j] < 0)
+          {
+            matrix[i][j] = 26 - abs(resMat[i][j] % 26);
+          }
+          else
+          {
+            matrix[i][j] = (resMat[i][j] % 26);
+          }
         }
     }
 }
@@ -118,46 +130,10 @@ int main()
 
   int det = determinant(keyVec, 3);
 
-  //Temporary
-  cout<<"\n";
-  for(int i=0; i<3; i++)
-    {
-      for(int j=0; j<1; j++)
-        {
-          cout<<wordVec[i][j];
-        }
-      cout<<"\n";
-    }
-
-  cout<<endl;
-
-  for(int i=0; i<3; i++)
-    {
-      for(int j=0; j<3; j++)
-        {
-          cout<<keyVec[i][j]<<" ";
-        }
-      cout<<endl;
-    }
-
-  cout<<"\n";
-  //End of Temporary
-  
   //Proceeding if Decryption Key is Non Singular
   if(det != 0)
   {
     inverseMatrix(keyVec);
-    //Temporary
-    for(int i=0; i<3; i++)
-      {
-        for(int j=0; j<3; j++)
-          {
-            cout<<keyVec[i][j];
-          }
-        cout<<"\n";
-      }
-    cout<<"\n";
-    //End of Temporary
     
     int resVec[3][1];
 
@@ -177,21 +153,10 @@ int main()
             for(int k=0; k<3; k++)
               {
                 resVec[i][j] += keyVec[i][k] * wordVec[k][j];
-                //resVec[i][j] %= 26;
+                resVec[i][j] %= 26;
               }
           }
       }
-
-  //Temporary
-    for(int i=0; i<3; i++)
-      {
-        for(int j=0; j<1; j++)
-          {
-            cout<<resVec[i][j];
-          }
-        cout<<"\n";
-      }
-  //End of Temporary
     
     //Printing Decoded Text
     cout<<"\n"<<"Decoded Text: ";
