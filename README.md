@@ -24,6 +24,13 @@ To perform decryption:
 
 ***For further resources, refer [here](https://sites.math.washington.edu/~marshall/math_136/projects/crypto.pdf) and [here](https://sites.math.washington.edu/~king/coursedir/m308a01/Projects/Cryptography.htm)***.
 
+## How to run
+Perform the following steps to run this project:
+- Clone the repository to your local machine.
+- Create a New Repl (C++).
+- Drag and Drop folders (turn by turn) into the Repl - **Note: Drag and Drop only one of the folders (Encryption/Decryption) at a time, as MakeFile causes issues. If you know a workaround, feel free to do so !**
+- Run the respective files and provide necessary inputs.
+
 ## Team Members
 - Lipi Kansal
 - Manab Kumar Biswas
