@@ -1,3 +1,3 @@
 #!/bin/bash
 read string
-echo $string | sed -r 's/(.{3})/\1\n/g' | awk 1 ORS=' '
+echo $string | xxd -p | tr -d '\n' | sed -r 's/(.{3})/\1\n/g' | awk 1 ORS=' '
