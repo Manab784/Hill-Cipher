@@ -32,10 +32,10 @@ Perform the following steps to run this project:
 - Run the respective files and provide necessary inputs.
 
 ## Team Members
-- Lipi Kansal
-- Manab Kumar Biswas
-- Manodnya K H
-- Mayank Agrawal
-- MD Taseen Atehar
+- Lipi Kansal : PES2UG20CS178
+- Manab Kumar Biswas : PES2UG20CS185
+- Manodnya K H : PES2UG20CS187
+- Mayank Agrawal : PES2UG20CS188
+- MD Taseen Atehar : PES2UG20CS191
 
 ## LAA Project SEM - IV 2022.
