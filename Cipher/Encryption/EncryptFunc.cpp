@@ -57,22 +57,6 @@ void wordGen(int wordVec[26][1], char word[26], int l)
     }
 }
 
-void keyGen(int keyVec[3][3], int l)
-{
-    srand(time(0));
-    do 
-    {
-      for (int i = 0; i < l; i++) 
-      {
-        for (int j = 0; j < l; j++) 
-        {
-          keyVec[i][j] = ((rand() % 100) + 1) % 26;
-        }
-      }
-    } 
-    while (determinant(keyVec, 3) == 0);
-}
-
 void encryptArray(int encryptWordVec[3][1], int keyVec[3][3], int wordVec[26][1], int l)
 {
     for (int i = 0; i < l; i++) 
