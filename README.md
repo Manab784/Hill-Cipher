@@ -1,4 +1,4 @@
-# Cryptography-LAA-Project
+# Hill Cipher
 A Cryptogtaphy based project involving **Hill Cipher** and **Linear Transformations**.
 
 ## Key Takeaways
