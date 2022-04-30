@@ -1,10 +1,9 @@
 #include <iostream>
 #include <math.h>
 #include <stdio.h>
-#include <fstream>
+#include<fstream>
 #include <string.h>
 #include <time.h>
-#include"Encryption.h"
 
 using namespace std;
 
@@ -39,8 +38,25 @@ int determinant(int matrix[3][3], int n)
   return det;
 }
 
-void wordGen(int wordVec[26][1], char word[26], int l)
+int main() 
 {
+  char text[100];
+  char word[26];
+  int wordVec[26][1];
+
+  cout<<"\n";
+
+  cin >> text;
+
+  //Add code to split input text into pairs of 3 letters 
+  strcpy(word,text);
+
+  int l = strlen(word);
+
+  if (l == 3) 
+  {
+    //Encrpyts the text input in pairs of 3 letters
+    //Generating Word Vector
     for (int i = 0; i < l; i++) 
     {
       for (int j = 0; j < 1; j++) 
@@ -55,10 +71,30 @@ void wordGen(int wordVec[26][1], char word[26], int l)
         }
       }
     }
-}
 
+<<<<<<< HEAD:Cipher/Encryption/EncryptFunc.cpp
 void encryptArray(int encryptWordVec[3][1], int keyVec[3][3], int wordVec[26][1], int l)
 {
+=======
+    int keyVec[3][3];
+    int encryptWordVec[3][1];
+
+    // Generating Encryption Key Array - No word split up as l <=3
+    srand(time(0));
+    do 
+    {
+      for (int i = 0; i < l; i++) 
+      {
+        for (int j = 0; j < l; j++) 
+        {
+          keyVec[i][j] = ((rand() % 100) + 1) % 26;
+        }
+      }
+    } 
+    while (determinant(keyVec, 3) == 0);
+
+    // Encryption Array
+>>>>>>> parent of 41f0475 (Structured Files):Cipher/Encryption.cpp
     for (int i = 0; i < l; i++) 
     {
       for (int j = 0; j < 1; j++) 
@@ -78,10 +114,15 @@ void encryptArray(int encryptWordVec[3][1], int keyVec[3][3], int wordVec[26][1]
         encryptWordVec[i][j] %= 26;
       }
     }
-}
 
+<<<<<<< HEAD:Cipher/Encryption/EncryptFunc.cpp
 void displayKey(int keyVec[3][3])
 {
+=======
+    // Encryption Key
+    cout << "\n"
+         << "Encryption Key: / ";
+>>>>>>> parent of 41f0475 (Structured Files):Cipher/Encryption.cpp
     for (int i = 0; i < 3; i++) 
     {
       for (int j = 0; j < 3; j++) 
@@ -89,10 +130,17 @@ void displayKey(int keyVec[3][3])
         cout << char(keyVec[i][j] + 65);
       }
     }
+<<<<<<< HEAD:Cipher/Encryption/EncryptFunc.cpp
 }
 
 void displayWord(int encryptWordVec[3][1])
 {
+=======
+
+    // Encrypted Word
+    cout << "\n"
+         << "Encrypted Word: ";
+>>>>>>> parent of 41f0475 (Structured Files):Cipher/Encryption.cpp
     for (int i = 0; i < 3; i++) 
     {
       for (int j = 0; j < 1; j++) 
@@ -100,5 +148,11 @@ void displayWord(int encryptWordVec[3][1])
         cout << char(encryptWordVec[i][j] + 65);
       }
     }
+<<<<<<< HEAD:Cipher/Encryption/EncryptFunc.cpp
     cout<<" ";
+=======
+
+    cout << "\n" <<"\n";
+  } 
+>>>>>>> parent of 41f0475 (Structured Files):Cipher/Encryption.cpp
 }
