@@ -14,6 +14,7 @@ int main()
   char word[26];
   int wordVec[26][1];
 
+  cout<<"\n";
 
   cin >> text;
   strcpy(word,text);
@@ -25,21 +26,20 @@ int main()
     //Generating Word Vector
     wordGen(wordVec, word, l);  
 
-    int keyVec[3][3]={{0,21,1},{1,20,16},{14,15,24}};
+    int keyVec[3][3];
     int encryptWordVec[3][1];
 
     // Generating Encryption Key Array - No word split up as l <=3
+    keyGen(keyVec, l);
 
     // Encryption Array
     encryptArray(encryptWordVec, keyVec, wordVec, l);
-    
-    
-    // Encryption Word
-    displayWord(encryptWordVec);
 
-    // Encrypted Key
+    // Encryption Key
     displayKey(keyVec);
 
+    // Encrypted Word
+    displayWord(encryptWordVec);
   }
   return 0;
 }
